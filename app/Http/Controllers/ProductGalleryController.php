@@ -25,8 +25,8 @@ class ProductGalleryController extends Controller
                 ->addColumn('action', function ($item) {
                     return '
 
-                            <form class="inline-block" action="' . route('dashboard.product.destroy', $item->id) . '" method="POST">
-                                <button class="bg-red-500 text-white rounded-md px-2 py-1 m-2">DELETE</button>
+                            <form class="inline-block" action="' . route('dashboard.gallery.destroy', $item->id) . '" method="POST">
+                                <button class="bg-red-500 text-white rounded-md px-2 py-1 m-2">Delete</button>
                             ' . method_field('delete') . csrf_field() . '
                             </form>
                         ';
@@ -48,9 +48,9 @@ class ProductGalleryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Product $product)
     {
-        //
+        return view('pages.dashboard.gallery.create', compact('product'));
     }
 
     /**
