@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,9 +22,10 @@ Route::get('/cart', [FrontEndController::class, 'cart'])->name('cart');
 Route::get('/checkout/success', [FrontEndController::class, 'success'])->name('checkout-success');
 
 
-Route::middleware(['auth.sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function(){
+Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function(){
     Route::get('/', [DashboardController::class, 'index'])->name('index');
+
     Route::middleware(['admin'])->group(function (){
-        //
+        Route::resource('product', ProductController::class);
     });
 });
