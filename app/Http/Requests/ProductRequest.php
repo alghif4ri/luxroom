@@ -27,7 +27,7 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'description' => 'required',
-            'price' => 'required|interger',
+            'price' => 'required|integer',
         ];
     }
 }

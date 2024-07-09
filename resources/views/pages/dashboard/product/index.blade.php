@@ -9,31 +9,21 @@
         <script>
             var datatable = $('#crudTable').DataTable({
                 ajax: {
-                    url: '{!! url()->current() !!}'
+                    url: '{!! url()->current() !!}',
                 },
-                column: [
-                    {
-                        data: 'id',
-                        name: 'id',
-                        width: '5%',
-                    },
-                    {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'price',
-                        name: 'price'
-                    },
+                columns: [
+                    {data: 'id',name: 'id',width: '5%'},
+                    {data: 'name',name: 'name'},
+                    {data: 'price',name: 'price'},
                     {
                         data: 'action',
                         name: 'action',
                         orderable: false,
                         searchable: false,
                         width: '25%'
-                    }
-                ]
-            })
+                    },
+                ],
+            });
         </script>
     </x-slot>
     <div class="py-12">
