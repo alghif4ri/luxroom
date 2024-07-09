@@ -30,27 +30,27 @@
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
                             <label
-                                class="block uppercase tracking-wide text-green-700 text-xs font-bold mb-2">Name</label>
+                                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Name</label>
                             <input type="text" name="name" id="" placeholder="Product Name"
                                 value="{{ old('name') }}"
-                                class="block w-full bg-green-200 text-green-700 border-green-200 rounded py-3 px-4 leading-tight focus:outline-none focus:border-green-500">
+                                class="block w-full bg-gray-200 text-gray-700 border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:border-gray-500">
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
                             <label
-                                class="block uppercase tracking-wide text-green-700 text-xs font-bold mb-2">Description</label>
+                                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Description</label>
                             <textarea type="text" name="description" id=""
-                                class="block w-full bg-green-200 text-green-700 border-green-200 rounded py-3 px-4 leading-tight focus:outline-none focus:border-green-500">{!! old('description') !!}</textarea>
+                                class="block w-full bg-gray-200 text-gray-700 border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:border-gray-500">{!! old('description') !!}</textarea>
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
                             <label
-                                class="block uppercase tracking-wide text-green-700 text-xs font-bold mb-2">Price</label>
+                                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Price</label>
                             <input type="text" name="price" id="" placeholder="Product Price"
                                 value="{{ old('price') }}"
-                                class="block w-full bg-green-200 text-green-700 border-green-200 rounded py-3 px-4 leading-tight focus:outline-none focus:border-green-500">
+                                class="block w-full bg-gray-200 text-gray-700 border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:border-gray-500">
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
