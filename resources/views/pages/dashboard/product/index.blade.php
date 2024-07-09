@@ -11,10 +11,22 @@
                 ajax: {
                     url: '{!! url()->current() !!}',
                 },
-                columns: [
-                    {data: 'id',name: 'id',width: '5%'},
-                    {data: 'name',name: 'name'},
-                    {data: 'price',name: 'price'},
+                columns: [{
+                        data: null,
+                        name: 'id',
+                        width: '5%',
+                        render: function(data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'price',
+                        name: 'price'
+                    },
                     {
                         data: 'action',
                         name: 'action',
