@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\TransactionItem;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -22,7 +23,7 @@ class TransactionController extends Controller
                 ->addColumn('action', function ($item) {
                     return '
                     <a class="inline-block border border-blue-700 bg-blue-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-blue-800 focus:outline-none focus:shadow-outline"
-                        href="' . route('dashboard.transaction.index', $item->id) . '">
+                        href="' . route('dashboard.transaction.show', $item->id) . '">
                         Show
                     </a>
                     <a class="inline-block border border-gray-700 bg-gray-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline"
@@ -66,9 +67,20 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Transaction $transaction)
     {
-        //
+        if (request()->ajax()) {
+            $query = TransactionItem::with(['product'])->where('transactions_id', $transaction->id);
+            // dd($query->toSql());
+            return DataTables::of($query)
+            ->editColumn('product.price', function ($item) {
+                return number_format($item->product->price);
+            })
+            ->rawColumns(['action'])
+            ->make();
+        }
+        // dd($transaction);
+        return view('pages.dashboard.transaction.show', compact ('transaction'));
     }
 
     /**
