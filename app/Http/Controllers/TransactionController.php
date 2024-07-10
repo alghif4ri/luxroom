@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
-use App\Models\TransactionItem;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\TransactionItem;
 use Yajra\DataTables\Facades\DataTables;
+use App\Http\Requests\TransactionRequest;
 
 class TransactionController extends Controller
 {
@@ -103,9 +105,13 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TransactionRequest $request, Transaction $transaction)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->name);
+
+        $transaction->update($data);
+        return redirect()->route('dashboard.transaction.index')->with('success', 'Data berhasil diupdate');
     }
 
     /**
