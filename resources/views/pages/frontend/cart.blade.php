@@ -6,7 +6,7 @@
         <div class="container mx-auto">
             <ul class="breadcrumb">
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="{{route('index')}}">Home</a>
                 </li>
                 <li>
                     <a href="#" aria-label="current-page">Shopping Cart</a>
@@ -54,41 +54,45 @@
 
                     <!-- START: ROW 1 -->
                     @forelse ($carts as $item)
-                    <div class="flex flex-start flex-wrap items-center mb-4 -mx-4" data-row="1">
-                        <div class="px-4 flex-none">
-                            <div class="" style="width: 90px; height: 90px">
-                                <img src="{{$item->product->galleries()->exists() ? Storage::url($item->product->galleries->first()->url) : 'https://placehold.jp/300x300.png' }}" alt="chair-1"
-                                    class="object-cover rounded-xl w-full h-full" />
+                        <div class="flex flex-start flex-wrap items-center mb-4 -mx-4" data-row="1">
+                            <div class="px-4 flex-none">
+                                <div class="" style="width: 90px; height: 90px">
+                                    <img src="{{ $item->product->galleries()->exists() ? Storage::url($item->product->galleries->first()->url) : 'https://placehold.jp/300x300.png' }}"
+                                        alt="chair-1" class="object-cover rounded-xl w-full h-full" />
+                                </div>
+                            </div>
+                            <div class="px-4 w-auto flex-1 md:w-5/12">
+                                <div class="">
+                                    <h6 class="font-semibold text-lg md:text-xl leading-8">
+                                        {{ $item->product->name }}
+                                    </h6>
+                                    <span class="text-sm md:text-lg">Office Room</span>
+                                    <h6 class="font-semibold text-base md:text-lg block md:hidden">
+                                        IDR {{ number_format($item->product->price) }}
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="px-4 w-auto flex-none md:flex-1 md:w-5/12 hidden md:block">
+                                <div class="">
+                                    <h6 class="font-semibold text-lg">IDR {{ number_format($item->product->price) }}</h6>
+                                </div>
+                            </div>
+                            <div class="px-4 w-2/12">
+                                <div class="text-center">
+                                    <form action="{{ route('cart-delete', $item->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="text-red-600 border-none focus:outline-none px-3 py-1">
+                                            X
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                        <div class="px-4 w-auto flex-1 md:w-5/12">
-                            <div class="">
-                                <h6 class="font-semibold text-lg md:text-xl leading-8">
-                                    {{ $item->product->name }}
-                                </h6>
-                                <span class="text-sm md:text-lg">Office Room</span>
-                                <h6 class="font-semibold text-base md:text-lg block md:hidden">
-                                    IDR {{number_format($item->product->price)}}
-                                </h6>
-                            </div>
-                        </div>
-                        <div class="px-4 w-auto flex-none md:flex-1 md:w-5/12 hidden md:block">
-                            <div class="">
-                                <h6 class="font-semibold text-lg">IDR {{number_format($item->product->price)}}</h6>
-                            </div>
-                        </div>
-                        <div class="px-4 w-2/12">
-                            <div class="text-center">
-                                <button data-delete-item="1" class="text-red-600 border-none focus:outline-none px-3 py-1">
-                                    X
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                     @empty
                         <p id="cart-empty" class="text-center py-8">
                             Ooops... Cart is empty
-                            <a href="/" class="underline">Shop Now</a>
+                            <a href="{{ route('index') }}" class="underline">Shop Now</a>
                         </p>
                     @endforelse
 
